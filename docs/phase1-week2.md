@@ -64,7 +64,7 @@ Now that you understand the internals, connect your Task API to PostgreSQL using
 | [Spring Data JPA — Getting Started](https://docs.spring.io/spring-data/jpa/reference/jpa/getting-started.html) | Setup, configuration, repository basics |
 | [Spring Data JPA — Query Methods](https://docs.spring.io/spring-data/jpa/reference/jpa/query-methods.html) | Deriving queries from method names — when and how |
 | [Flyway — Getting Started](https://documentation.red-gate.com/flyway/getting-started-with-flyway/first-steps-flyway-autopilot-a-beginners-guide) | Migrations concept, V1, V2 naming convention |
-| [Flyway — Migrations](https://www.red-gate.com/fd/migrations-273973333.html) | SQL migration syntax, undo, repeatable migrations |
+| [Flyway — Migrations](https://flywaydb.org/docs/Concepts/Migrations) | SQL migration syntax, undo, repeatable migrations |
 
 ### What to Read
 

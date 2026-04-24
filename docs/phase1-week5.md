@@ -20,7 +20,7 @@ Before writing a single line of code, you must choose the right pagination strat
 | # | Resource | What It Covers |
 |---|----------|----------------|
 | 1 | [Spring Boot GraphQL Pagination — Baeldung](https://www.baeldung.com/spring-boot-graphql-pagination) | Page-based vs cursor-based pagination with code examples |
-| 2 | [Stripe — Working with APIs Blog](https://stripe.com/blog/working-with-apis) | Pagination patterns from a real API provider |
+| 2 | [Stripe — API Pagination](https://stripe.com/docs/api/pagination) | Pagination patterns from a real API provider |
 | 3 | [Java JDBC Pagination — Baeldung](https://www.baeldung.com/java-jdbc-pagination) | Cursor vs offset pagination in plain Java |
 | 4 | [Hibernate Pagination — Baeldung](https://www.baeldung.com/hibernate-pagination) | How Hibernate handles pagination under the hood |
 

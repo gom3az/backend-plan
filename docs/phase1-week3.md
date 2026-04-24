@@ -488,7 +488,7 @@ These are optional — for if a topic confused you or you want more depth:
 
 | Resource | When to Use |
 |----------|-------------|
-| [Vlad Mihalcea — LazyInitializationException](https://vladmihalcea.com/the-best-way-to-handle-hibernate-lazyinitializationexception/) | Understand why DTOs prevent lazy loading issues — read if Week 2 JPA concepts felt fuzzy |
+| [Vlad Mihalcea — Fetch Strategy](https://vladmihalcea.com/hibernate-facts-the-importance-of-fetch-strategy/) | Understand why DTOs prevent lazy loading issues — read if Week 2 JPA concepts felt fuzzy |
 | [Baeldung — Custom Validator](https://www.baeldung.com/custom-validator) | Need a validation rule that goes beyond built-in annotations |
 | [Spring Framework — Problem Detail (RFC 9457)](https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-controller/ann-exceptionhandler.html) | For more structured error responses aligned with RFC 9457 |
 | [Jakarta Bean Validation — Payload](https://jakarta.ee/specifications/bean-validation/3.0/jakarta-bean-validation-spec-3.0.html) | Using validation payload for severity, localization, etc. |

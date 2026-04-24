@@ -649,12 +649,12 @@ Before the weekend:
 
 | Resource | What It Covers |
 |----------|----------------|
-| [Reusable Containers](https://testcontainers.com/features/reusable_containers/) | `reuse=true` flag, singleton pattern, benefits and limitations |
+| [Reusable Containers](https://testcontainers.com/guides/testcontainers-container-lifecycle/) | `reuse=true` flag, singleton pattern, benefits and limitations |
 | [Testcontainers Container Lifecycle](https://testcontainers.com/guides/testcontainers-container-lifecycle/) | Singleton pattern trade-offs |
 
 ### What to Read
 
-1. Read the [Reusable Containers](https://testcontainers.com/features/reusable_containers/) guide — understand the `reuse=true` configuration and when it is/isn't appropriate.
+1. Read the [Reusable Containers](https://testcontainers.com/guides/testcontainers-container-lifecycle/) guide — understand the `reuse=true` configuration and when it is/isn't appropriate.
 2. Review the performance implications of container startup in CI.
 
 ### Reusable Containers
@@ -1175,4 +1175,4 @@ Complete this checklist before moving to Week 7:
 - [Replace H2 with Real Database Using Testcontainers](https://testcontainers.com/guides/replace-h2-with-real-database-for-testing/)
 - [Testcontainers Container Lifecycle Management](https://testcontainers.com/guides/testcontainers-container-lifecycle/)
 - [Testcontainers PostgreSQL Module](https://testcontainers.com/modules/postgresql/)
-- [Reusable Containers](https://testcontainers.com/features/reusable_containers/)
+- [Reusable Containers](https://testcontainers.com/guides/testcontainers-container-lifecycle/)

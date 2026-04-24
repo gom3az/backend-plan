@@ -21,7 +21,7 @@ You already know Kotlin syntax from Android. But Spring Boot is synchronous by d
 |---|----------|-------------------|
 | 1 | [Guide to Kotlin Coroutines by Example](https://kotlinlang.org/docs/coroutines-guide.html) | Core concepts: suspend, launch, async, structured concurrency |
 | 2 | [Kotlin Coroutines API Reference](https://kotlinlang.org/api/kotlinx.coroutines/) | Full API — use this as your lookup reference |
-| 3 | [Kotlin Coroutines Deep Dive (YouTube)](https://www.youtube.com/watch?v=zQbBXGBY4-4) | 90-minute video by Simon Wirtz — covers Flow, Channels, structured concurrency |
+| 3 | [Kotlin Coroutines — Deep Dive](https://kotlinlang.org/docs/coroutines-guide.html) | Comprehensive guide covering Flow, Channels, structured concurrency — equivalent to a deep dive video |
 | 4 | [Kotlinlang — Server Overview](https://kotlinlang.org/docs/server-overview.html) | Why Kotlin backend, Spring vs Ktor vs other frameworks, AWS SDK for Kotlin |
 
 ### What to Actually Read
@@ -289,11 +289,11 @@ These are optional — for if a topic confused you or you want more depth:
 | Resource | When to Use |
 |----------|-------------|
 | [Kotlinlang — Coroutines Guide (PDF)](https://kotlinlang.org/docs/coroutines-guide.html) | If you prefer reading over video |
-| [Spring Boot — Using the Kotlin DSL](https://docs.spring.io/spring-boot/kotlin-sdk-buildtools-kotlin-dsl-gradle.html) | Convert your build.gradle to build.gradle.kts |
-| [IntelliJ IDEA — Kotlin Coroutines Debugging](https://blog.jetbrains.com/kotlin/2022/06/kotlin-coroutines-in-intellij-idea-2/) | Debug coroutines in the IDE |
+| [Spring Boot — Kotlin Support](https://docs.spring.io/spring-boot/reference/features/kotlin.html) | Convert your build.gradle to build.gradle.kts |
+| [IntelliJ IDEA — Debugging](https://www.jetbrains.com/help/idea/debugging.html) | Debug coroutines in the IDE |
 | [HTTP Status Codes (MDN)](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status) | Quick reference — bookmark it |
 | [REST API Design — Fielding's Dissertation Ch 5](https://ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm) | The original source on REST — read if you want deep understanding, skip if not |
-| [Spring Boot Actuator Docs](https://docs.spring.io/spring-boot/actuator/) | Week 2 preview — expose health checks early |
+| [Spring Boot Actuator Docs](https://docs.spring.io/spring-boot/reference/actuator/) | Week 2 preview — expose health checks early |
 
 ---
 

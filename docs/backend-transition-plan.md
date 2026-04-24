@@ -45,7 +45,7 @@
 
 | Day | Topic | Resource |
 |-----|-------|----------|
-| Tue | Kotlin coroutines deep dive — suspending functions, Flow, channels | [Kotlin Coroutines](https://kotlinlang.org/docs/coroutines.html) |
+| Tue | Kotlin coroutines deep dive — suspending functions, Flow, channels | [Kotlin Coroutines](https://kotlinlang.org/docs/coroutines-guide.html) |
 | Wed | Spring Boot REST guide — Kotlin examples throughout | [Building REST Services with Spring](https://spring.io/guides/tutorials/rest/) |
 | Thu | Build: Create task API project with Spring Initializr | [Spring Initializr](https://start.spring.io/) |
 | Fri-Sun | Build: GET /tasks, POST /tasks endpoints returning JSON | — |
@@ -109,7 +109,7 @@
 
 | Day | Topic | Resource |
 |-----|-------|----------|
-| Tue | REST query design — cursor vs offset pagination, filter param conventions | [Stripe — Working with APIs](https://stripe.com/blog/working-with-apis) |
+| Tue | REST query design — cursor vs offset pagination, filter param conventions | [Stripe — Working with APIs](https://stripe.com/docs/api/pagination) |
 | Wed | Spring Data pagination — Pageable, Page, Slice, Sort | [Baeldung — Pagination in Spring](https://www.baeldung.com/spring-data-pagination) |
 | Thu | Specification pattern — dynamic filtering with JPA Specifications | [Baeldung — JPA Specifications](https://www.baeldung.com/rest-api-search-specification) |
 | Fri-Sun | Build: GET /tasks?page=0&size=20&status=open&sort=dueDate,asc with full filtering | — |
@@ -155,7 +155,7 @@
 | Day | Topic | Resource |
 |-----|-------|----------|
 | Tue | Multi-stage Dockerfiles for Spring Boot — small image footprint, layered JARs | [Docker — Containerizing Spring Boot](https://docs.docker.com/language/java/) |
-| Wed | Docker Compose — local dev with PostgreSQL + Redis services | [Docker Compose Samples](https://docs.docker.com/compose/samples-for-dev/) |
+| Wed | Docker Compose — local dev with PostgreSQL + Redis services | [Docker Compose Samples](https://docs.docker.com/compose/compose-file/) |
 | Thu | Writing a portfolio README — architecture overview, setup instructions, API docs, badges | [GitHub README Best Practices](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes) |
 | Fri | Deploy to Railway free tier — PostgreSQL + Redis add-ons | [Railway Documentation](https://docs.railway.app/) |
 | Sat-Sun | Polish README, ensure CI passes, verify live endpoint works | — |
@@ -223,8 +223,8 @@
 
 | Day | Topic | Resource |
 |-----|-------|----------|
-| Tue | Event-driven architecture patterns — event sourcing, CQRS, saga | [Martin Fowler — Event Sourcing](https://martinfowler.com/articles/201701-event-sourcing.html) |
-| Wed | Event-driven architecture patterns — saga, choreography vs orchestration | [Martin Fowler — Saga Pattern](https://martinfowler.com/articles/201905-saga.html) |
+| Tue | Event-driven architecture patterns — event sourcing, CQRS, saga | [Martin Fowler — Event Sourcing](https://microservices.io/patterns/data/event-sourcing.html) |
+| Wed | Event-driven architecture patterns — saga, choreography vs orchestration | [Martin Fowler — Saga Pattern](https://microservices.io/patterns/data/saga.html) |
 | Thu | Outbox pattern — reliable event publishing from a transactional database | [ microservices.io — Outbox Pattern](https://microservices.io/patterns/data/transactional-outbox.html) |
 | Fri-Sun | Build: Apply outbox pattern for reliable event publishing from your Phase 1 app | — |
 
@@ -274,7 +274,7 @@
 |-----|-------|----------|
 | Tue | Structured logging — JSON logs, correlation IDs, MDC | [Baeldung — Spring Logging](https://www.baeldung.com/spring-logging) |
 | Wed | Log aggregation — ELK stack (Elasticsearch, Logstash, Kibana) basics | [Elastic — Getting Started](https://www.elastic.co/guide/en/elasticsearch/reference/current/getting-started.html) |
-| Thu | Alerting — defining SLOs, alerting on error rate, latency | [Prometheus — Alerting](https://prometheus.io/docs/prometheus/latest/configuration/alerting/) |
+| Thu | Alerting — defining SLOs, alerting on error rate, latency | [Prometheus — Alerting](https://prometheus.io/docs/alerting/latest/overview/) |
 | Fri-Sun | Build: JSON structured logs with trace IDs. Set up alert rules for error rate > 1%. | — |
 
 *Deliverable*: Structured JSON logs with trace IDs. Alerting rules for error rate and latency SLOs.
@@ -341,7 +341,7 @@
 | Day | Topic | Resource |
 |-----|-------|----------|
 | Tue | GitHub Actions — workflows, jobs, steps, matrix builds | [GitHub Actions Documentation](https://docs.github.com/en/actions) |
-| Wed | Docker build/push — multi-stage builds, registry authentication | [GitHub Actions — Docker](https://docs.github.com/en/actions/publishing-images) |
+| Wed | Docker build/push — multi-stage builds, registry authentication | [GitHub Actions — Docker](https://docs.github.com/en/actions/tutorials/publish-packages) |
 | Thu | Deploying to Kubernetes from GitHub Actions — kubeconfig, helm upgrade | [GitHub Actions — Kubernetes](https://github.com/marketplace/actions/kubernetes) |
 | Fri-Sun | Build: CI pipeline (test + build + push). CD pipeline (helm upgrade on main). | — |
 
@@ -419,7 +419,7 @@
 
 | Day | Topic | Resource |
 |-----|-------|----------|
-| Mon | Portfolio README deep-dive — architecture diagrams, decisions, trade-offs | [Stripe — API Design](https://stripe.com/blog/working-with-apis) |
+| Mon | Portfolio README deep-dive — architecture diagrams, decisions, trade-offs | [Stripe — API Design](https://stripe.com/docs/api/pagination) |
 | Tue | System design practice — design a notification system, design a URL shortener | [Excalidraw — Diagrams](https://excalidraw.com/) |
 | Wed | Behavioral prep — stories about Phase 1-3 work, decisions, failures, learning | [GitHub Profile README Guide](https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-profile/customizing-your-profile/managing-your-profile-readme) |
 | Thu | Mock interviews — trade coding challenges for system design discussions | [Pramp — System Design](https://www.pramp.com/) |
@@ -436,7 +436,7 @@
 
 | Resource | URL |
 |----------|-----|
-| Kotlin Coroutines | https://kotlinlang.org/docs/coroutines.html |
+| Kotlin Coroutines | https://kotlinlang.org/docs/coroutines-guide.html |
 | Building REST Services with Spring | https://spring.io/guides/tutorials/rest/ |
 | Spring Boot Reference | https://docs.spring.io/spring-boot/reference/ |
 | Spring Data JPA Reference | https://docs.spring.io/spring-data/jpa/reference/ |
@@ -458,10 +458,10 @@
 
 | Resource | URL |
 |----------|-----|
-| Martin Fowler — Event Sourcing | https://martinfowler.com/articles/201701-event-sourcing.html |
-| Martin Fowler — Saga Pattern | https://martinfowler.com/articles/201905-saga.html |
+| Martin Fowler — Event Sourcing | https://microservices.io/patterns/data/event-sourcing.html |
+| Martin Fowler — Saga Pattern | https://microservices.io/patterns/data/saga.html |
 | Outbox Pattern | https://microservices.io/patterns/data/transactional-outbox.html |
-| Stripe — Working with APIs | https://stripe.com/blog/working-with-apis |
+| Stripe — Working with APIs | https://stripe.com/docs/api/pagination |
 
 ### Infrastructure & Cloud
 
@@ -481,7 +481,7 @@
 |----------|-----|
 | OpenTelemetry | https://opentelemetry.io/docs/concepts/observability-primer/ |
 | Micrometer | https://micrometer.io/docs/ |
-| Prometheus Alerting | https://prometheus.io/docs/prometheus/latest/configuration/alerting/ |
+| Prometheus Alerting | https://prometheus.io/docs/alerting/latest/overview/ |
 
 ### Reference & Learning
 

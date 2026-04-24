@@ -165,18 +165,18 @@ Before Wednesday, verify:
 | Resource | What It Covers |
 |----------|----------------|
 | [Docker Compose Documentation](https://docs.docker.com/compose/) | Compose file structure, services, networks, volumes |
-| [Docker Compose — Compose File Spec](https://docs.docker.com/compose/compose-file/compose-file-spec/) | Full compose file specification |
-| [Docker Compose — Environment Variables](https://docs.docker.com/compose/environment-vars/) | Interpolating env vars in compose files |
+| [Docker Compose — Compose File Spec](https://docs.docker.com/compose/compose-file/) | Full compose file specification |
+| [Docker Compose — Environment Variables](https://docs.docker.com/compose/environment-variables/) | Interpolating env vars in compose files |
 | [Docker Compose — Networking](https://docs.docker.com/compose/networking/) | Service-to-service communication, container naming |
 
 ### What to Read
 
 **Primary reading — 20 minutes:**
-- Read [docs.docker.com/compose/compose-file/compose-file-spec/](https://docs.docker.com/compose/compose-file/compose-file-spec/) — the Services section is most critical for your use case.
+- Read [docs.docker.com/compose/compose-file/compose-file-spec/](https://docs.docker.com/compose/compose-file/) — the Services section is most critical for your use case.
 - Read [docs.docker.com/compose/networking/](https://docs.docker.com/compose/networking/) — understand how services communicate by name.
 
 **Supplementary — 10 minutes:**
-- Scan [docs.docker.com/compose/environment-vars/](https://docs.docker.com/compose/environment-vars/) — you will use interpolation heavily.
+- Scan [docs.docker.com/compose/environment-vars/](https://docs.docker.com/compose/environment-variables/) — you will use interpolation heavily.
 
 ### Practical
 
@@ -329,7 +329,7 @@ Before Thursday, verify:
 | [GitHub — About READMEs](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes) | README best practices, structure guidance |
 | [GitHub — Writing Good Documentation](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes) | Documentation principles |
 | [Shields.io — Badge Service](https://shields.io/) | Dynamic badges for build status, coverage, version |
-| [Testcontainers — Docker in CI](https://testcontainers.com/guides/testcontainers-and-github-actions/) | CI badge for tests running in containers |
+| [Testcontainers — Docker in CI](https://java.testcontainers.org/supported_docker_environment/continuous_integration/dind_patterns/) | CI badge for tests running in containers |
 
 ### What to Read
 
@@ -586,7 +586,7 @@ MIT License — feel free to use this as a reference for your own projects.
 
 - [Docker — Spring Boot Guide](https://docs.docker.com/language/java/)
 - [Docker Compose — Getting Started](https://docs.docker.com/compose/)
-- [GitHub Actions — Publishing Docker Images](https://docs.github.com/en/actions/publishing-images)
+- [GitHub Actions — Publishing Docker Images](https://docs.github.com/en/actions/tutorials/publish-packages)
 - [Railway — Quick Start](https://docs.railway.com/getting-started)
 
 ---
@@ -600,7 +600,7 @@ MIT License — feel free to use this as a reference for your own projects.
 | [Railway — Quick Start](https://docs.railway.com/getting-started) | Railway CLI installation, init, deploy |
 | [Railway — Deploy](https://docs.railway.com/deploy) | Deploying Dockerfiles, GitHub integration, environment variables |
 | [Railway — Databases](https://docs.railway.com/databases) | PostgreSQL, Redis, MySQL add-ons, connection methods |
-| [Railway — Environment Variables](https://docs.railway.com/environment-variables) | Setting and referencing variables |
+| [Railway — Environment Variables](https://docs.railway.app/variables) | Setting and referencing variables |
 
 ### What to Read
 
@@ -821,7 +821,7 @@ jobs:
 | Resource | What It Covers |
 |----------|----------------|
 | [Conventional Commits v1.0.0](https://www.conventionalcommits.org/en/v1.0.0/) | Full specification with examples |
-| [GitHub — Managing Branches](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/managing-branches-in-your-repository) | Branch naming conventions |
+| [GitHub — Managing Branches](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions) | Branch naming conventions |
 | [Semantic Versioning](https://semver.org/) | MAJOR.MINOR.PATCH version numbering |
 
 ### What to Read
@@ -1303,17 +1303,17 @@ These labels appear in container registries and enable image traceability.
 | Docker — Spring Boot Containerization | https://docs.docker.com/language/java/ |
 | Docker — Multi-Stage Build Images | https://docs.docker.com/language/java/build-images/ |
 | Docker Compose Documentation | https://docs.docker.com/compose/ |
-| Docker Compose — Compose File Spec | https://docs.docker.com/compose/compose-file/compose-file-spec/ |
+| Docker Compose — Compose File Spec | https://docs.docker.com/compose/compose-file/ |
 | Docker Compose — Networking | https://docs.docker.com/compose/networking/ |
-| Docker Compose — Environment Variables | https://docs.docker.com/compose/environment-vars/ |
+| Docker Compose — Environment Variables | https://docs.docker.com/compose/environment-variables/ |
 | GitHub Actions — Workflow Syntax | https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions |
-| GitHub Actions — Publishing Docker Images | https://docs.github.com/en/actions/publishing-images |
+| GitHub Actions — Publishing Docker Images | https://docs.github.com/en/actions/tutorials/publish-packages |
 | GitHub Container Registry (GHCR) | https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry |
 | Conventional Commits v1.0.0 | https://www.conventionalcommits.org/en/v1.0.0/ |
 | Railway — Quick Start | https://docs.railway.com/getting-started |
 | Railway — Deploy | https://docs.railway.com/deploy |
 | Railway — Databases | https://docs.railway.com/databases |
-| Railway — Environment Variables | https://docs.railway.com/environment-variables |
+| Railway — Environment Variables | https://docs.railway.app/variables |
 | Semantic Versioning | https://semver.org/ |
 | Shields.io — Badge Service | https://shields.io/ |
 

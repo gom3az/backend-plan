@@ -18,9 +18,9 @@ Caching is the easiest high-leverage optimization you can add to a read-heavy AP
 
 | # | Resource | What It Covers |
 |---|----------|----------------|
-| 1 | [Spring Boot — Caching](https://docs.spring.io/spring-boot/4.0.6/reference/io/caching.html) | Full caching documentation — @Cacheable, Redis, TTL config |
+| 1 | [Spring Boot — Caching](https://docs.spring.io/spring-boot/4.0/reference/io/caching.html) | Full caching documentation — @Cacheable, Redis, TTL config |
 | 2 | [Spring Data Redis — Reference](https://docs.spring.io/spring-data/redis/reference/) | Redis client setup, Lettuce, RedisTemplate |
-| 3 | [Spring Boot Auto-configuration Classes](https://docs.spring.io/spring-boot/4.0.6/reference/appendix/auto-configuration-classes/spring-boot-data-redis.html) | What Spring Boot auto-configures for Redis |
+| 3 | [Spring Boot Auto-configuration Classes](https://docs.spring.io/spring-boot/4.0/reference/appendix/auto-configuration-classes.html) | What Spring Boot auto-configures for Redis |
 | 4 | [Spring Guides — Caching](https://spring.io/guides/gs/caching/) | Official step-by-step caching guide |
 | 5 | [GitHub — springdoc-openapi](https://github.com/springdoc/springdoc-openapi) | The library we'll use for Swagger/OpenAPI |
 
@@ -180,7 +180,7 @@ Annotations are how you control caching behavior per-method. Wrong choices here 
 
 | # | Resource | What It Covers |
 |---|----------|----------------|
-| 1 | [Spring Boot Caching Docs](https://docs.spring.io/spring-boot/4.0.6/reference/io/caching.html#io.caching.provider.redis) | Redis cache provider config, TTL per cache |
+| 1 | [Spring Boot Caching Docs](https://docs.spring.io/spring-boot/4.0/reference/io/caching.html#io.caching.provider.redis) | Redis cache provider config, TTL per cache |
 | 2 | [Spring Cache Abstraction Docs](https://docs.spring.io/spring-framework/reference/integration/cache.html) | @Cacheable, @CacheEvict, @CachePut — full reference |
 | 3 | [springdoc-openapi — Annotations](https://github.com/springdoc/springdoc-openapi) | @Operation, @ApiResponse, OpenAPI metadata |
 
@@ -299,7 +299,7 @@ Your portfolio deliverable for this week is Swagger UI accessible at `/swagger-u
 |---|----------|----------------|
 | 1 | [GitHub — springdoc-openapi](https://github.com/springdoc/springdoc-openapi) | Full README — dependency, URLs, configuration |
 | 2 | [springdoc-openapi Demos](https://github.com/springdoc/springdoc-openapi-demos) | Working examples with different Spring Boot versions |
-| 3 | [Spring Boot — CORS](https://docs.spring.io/spring-boot/4.0.6/reference/web/web.html#web.security.cors) | You'll need CORS config when mobile clients hit your API |
+| 3 | [Spring Boot — CORS](https://docs.spring.io/spring-boot/reference/web/spring-security.html#web-security-cors) | You'll need CORS config when mobile clients hit your API |
 
 ### What to Read
 
@@ -801,7 +801,7 @@ For a portfolio project deployed to Railway with a single instance: **Caffeine**
 
 ## References
 
-- [Spring Boot 4.0.6 — Caching Documentation](https://docs.spring.io/spring-boot/4.0.6/reference/io/caching.html)
+- [Spring Boot 4.0.6 — Caching Documentation](https://docs.spring.io/spring-boot/4.0/reference/io/caching.html)
 - [Spring Data Redis — Reference](https://docs.spring.io/spring-data/redis/reference/)
 - [Spring Framework — Cache Abstraction](https://docs.spring.io/spring-framework/reference/integration/cache.html)
 - [springdoc-openapi — GitHub](https://github.com/springdoc/springdoc-openapi)
