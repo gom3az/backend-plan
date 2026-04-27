@@ -11,6 +11,6 @@ interface TaskRepository : JpaRepository<Task, Long> {
 
     fun countByCompleted(completed: Boolean): List<Task>
 
-    fun existsByTitle(completed: Boolean): Boolean
+    fun existsByTitle(title: String): Boolean
 
 }

@@ -1,21 +1,24 @@
 package com.gomaa.tasks.dto
 
+
 import com.gomaa.tasks.model.Task
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Size
 import java.time.LocalDateTime
 
 data class CreateTaskRequest(
-    @field:NotBlank @field:Size(min = 1, max = 255) val title: String,
-
-    val description: String? = null, val completed: Boolean = false, val dueDate: LocalDateTime? = null
+    @field:NotBlank(message = "Title is required") @field:Size(
+        min = 1,
+        max = 255,
+        message = "Title must be between 1 and 255 characters"
+    )
+    val title: String,
+    val completed: Boolean = false,
+    @field:Size(max = 1000, message = "Description must not exceed 1000 characters")
+    val description: String? = null,
+    val dueDate: LocalDateTime? = null,
 )
 
-data class UpdateTaskRequest(
-    @field:Size(min = 1, max = 255) val title: String? = null,
-
-    val description: String? = null, val completed: Boolean? = null, val dueDate: LocalDateTime? = null
-)
 
 data class TaskResponse(
     val id: Long,
@@ -26,6 +29,7 @@ data class TaskResponse(
     val createdAt: LocalDateTime,
     val updatedAt: LocalDateTime
 )
+
 
 fun Task.toResponse() = TaskResponse(
     id = id,
