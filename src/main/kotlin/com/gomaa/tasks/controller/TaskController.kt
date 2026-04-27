@@ -4,10 +4,10 @@ import com.gomaa.tasks.dto.*
 import com.gomaa.tasks.exceptions.TaskNotFoundException
 import com.gomaa.tasks.repository.TaskRepository
 import jakarta.validation.Valid
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.util.UriComponentsBuilder
-import java.time.LocalDateTime
 
 @RestController
 @RequestMapping("/tasks")
@@ -25,13 +25,11 @@ class TaskController(val taskRepository: TaskRepository) {
     }
 
     @PostMapping("")
-    fun save(
-        @RequestBody @Valid request: CreateTaskRequest, uriComponentsBuilder: UriComponentsBuilder
-    ): ResponseEntity<Unit> {
-        val created = taskRepository.save(request.toEntity())
-
-        val uri = uriComponentsBuilder.buildAndExpand(created.id).toUri()
-        return ResponseEntity.created(uri).build()
+    fun createTask(@Valid @RequestBody request: CreateTaskRequest): ResponseEntity<TaskResponse> {
+        val task = taskRepository.save(request.toEntity())
+        return ResponseEntity
+            .status(HttpStatus.CREATED)
+            .body(task.toResponse())
     }
 
     @PutMapping("/{id}")
@@ -41,15 +39,7 @@ class TaskController(val taskRepository: TaskRepository) {
         uriComponentsBuilder: UriComponentsBuilder
     ): ResponseEntity<Unit> {
         val task = taskRepository.findById(id).orElseThrow { TaskNotFoundException() }
-        taskRepository.save(
-            task.copy(
-                title = request.title ?: task.title,
-                description = request.description ?: task.description,
-                completed = request.completed ?: task.completed,
-                dueDate = request.dueDate ?: task.dueDate,
-                updatedAt = LocalDateTime.now()
-            )
-        )
+        taskRepository.save(request.toEntity(task))
         val uri = uriComponentsBuilder.buildAndExpand(id).toUri()
         return ResponseEntity.created(uri).build()
     }
