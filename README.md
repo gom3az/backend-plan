@@ -54,6 +54,22 @@ src/main/kotlin/com/gomaa/tasks/
 ./gradlew bootRun
 ```
 
+## Running with Docker
+
+```bash
+# Build the JAR and start all services (postgres, redis, api)
+./gradlew bootJar
+docker compose up -d
+
+# View logs
+docker compose logs -f api
+
+# Stop all services
+docker compose down
+```
+
+The API will be available at `http://localhost:8080`.
+
 ## API Endpoints
 
 | Method | Path | Description |
