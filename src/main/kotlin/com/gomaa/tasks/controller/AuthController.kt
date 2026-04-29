@@ -25,7 +25,7 @@ class AuthController(
     }
 
     @PostMapping("/register")
-    fun register(@RequestBody @Valid request: @Valid RegisterRequest): ResponseEntity<Unit> {
+    fun register(@RequestBody @Valid request: @Valid RegisterRequest): ResponseEntity<String> {
         return ResponseEntity.ok(authService.register(request))
     }
 }
