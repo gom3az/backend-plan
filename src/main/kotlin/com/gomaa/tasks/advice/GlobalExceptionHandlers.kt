@@ -3,9 +3,11 @@ package com.gomaa.tasks.advice
 import com.gomaa.tasks.dto.ErrorResponse
 import com.gomaa.tasks.exceptions.ApiValidationException
 import com.gomaa.tasks.exceptions.TaskNotFoundException
+import com.gomaa.tasks.exceptions.UserExistException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.http.converter.HttpMessageNotReadableException
+import org.springframework.security.core.AuthenticationException
 import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
@@ -86,6 +88,30 @@ class GlobalExceptionHandler {
                     path = request.getDescription(false).replace("uri=", "")
                 )
             )
+    }
+
+    @ExceptionHandler(AuthenticationException::class)
+    fun handleAuthentication(
+        ex: AuthenticationException, request: WebRequest
+    ): ResponseEntity<ErrorResponse> {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(
+                ErrorResponse(
+                    status = HttpStatus.UNAUTHORIZED.value(),
+                    message = "Invalid credentials",
+                    path = request.getDescription(false).replace("uri=", "")
+                )
+            )
+    }
+
+    @ExceptionHandler(UserExistException::class)
+    fun handleUserExistException(ex: UserExistException, request: WebRequest) : ResponseEntity<ErrorResponse> {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+            ErrorResponse(
+                status = HttpStatus.BAD_REQUEST.value(),
+                message = ex.message ?: "User already exists",
+                path = request.getDescription(false).replace("uri=", "")
+            )
+        )
     }
 
     @ExceptionHandler(Exception::class)
