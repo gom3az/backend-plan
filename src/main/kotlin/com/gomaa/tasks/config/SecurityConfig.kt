@@ -1,6 +1,7 @@
 package com.gomaa.tasks.config
 
 import com.gomaa.tasks.services.TaskUserDetailsService
+import jakarta.servlet.http.HttpServletResponse
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpMethod
@@ -34,6 +35,11 @@ class SecurityConfig(
                 auth.requestMatchers(HttpMethod.PUT, "/tasks/**").hasAuthority("ROLE_USER")
                 auth.requestMatchers(HttpMethod.DELETE, "/tasks/**").hasAuthority("ROLE_ADMIN")
                 auth.anyRequest().authenticated()
+            }
+            .exceptionHandling { ex ->
+                ex.authenticationEntryPoint { _, response, _ ->
+                    response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized")
+                }
             }
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter::class.java)
             .sessionManagement { session ->
