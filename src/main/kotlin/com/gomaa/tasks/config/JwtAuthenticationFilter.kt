@@ -28,16 +28,17 @@ class JwtAuthenticationFilter(
         val token = authHeader.substringAfter("Bearer ")
 
         try {
-            val jwt = tokenService.jwtDecoder.decode(token)
-            val scope = jwt.getClaimAsString("scope") ?: ""
-            val authorities = if (scope.isNotEmpty()) {
-                scope.split(" ").map { SimpleGrantedAuthority(it) }
-            } else {
-                emptyList()
+            if (!tokenService.validateToken(token)) {
+                filterChain.doFilter(request, response)
+                return
             }
 
+            val username = tokenService.extractUsername(token)
+            val roles = tokenService.extractRoles(token)
+            val authorities = roles.map { SimpleGrantedAuthority(it) }
+
             val authentication = UsernamePasswordAuthenticationToken(
-                jwt.subject, null, authorities
+                username, null, authorities
             )
             SecurityContextHolder.getContext().authentication = authentication
         } catch (ex: Exception) {

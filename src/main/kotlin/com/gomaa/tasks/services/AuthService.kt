@@ -31,7 +31,9 @@ class AuthService(
                 )
             )
             logger.info("Authentication successful for user: ${userLogin.username}")
-            return tokenService.generateToken(auth)
+            val user =
+                userRepository.findByUsername(userLogin.username) ?: throw NoSuchElementException("User not found")
+            return tokenService.generateToken(user.username, user.roles)
         } catch (ex: Exception) {
             logger.error("Authentication failed for user: ${userLogin.username}", ex)
             throw ex
