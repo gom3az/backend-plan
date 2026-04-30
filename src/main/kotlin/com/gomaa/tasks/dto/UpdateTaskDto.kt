@@ -18,5 +18,6 @@ fun UpdateTaskRequest.toEntity(task: Task) = Task(
     completed = completed ?: task.completed,
     dueDate = dueDate ?: task.dueDate,
     createdAt = task.createdAt,
-    updatedAt = LocalDateTime.now()
+    updatedAt = LocalDateTime.now(),
+    user = task.user
 )
