@@ -2,14 +2,15 @@ package com.gomaa.tasks.controller
 
 import com.gomaa.tasks.dto.*
 import com.gomaa.tasks.exceptions.TaskNotFoundException
+import com.gomaa.tasks.exceptions.UserNotFoundException
 import com.gomaa.tasks.repository.TaskRepository
 import com.gomaa.tasks.repository.UserRepository
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.security.core.userdetails.UserDetails
-import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -33,15 +34,17 @@ class TaskController(
         return ResponseEntity.ok(task.toResponse())
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @PostMapping("")
     fun createTask(
         @Valid @RequestBody request: CreateTaskRequest, @AuthenticationPrincipal userDetails: UserDetails
     ): ResponseEntity<TaskResponse> {
-        val user = userRepository.findByUsername(userDetails.username) ?: throw UsernameNotFoundException("User not found")
+        val user = userRepository.findByUsername(userDetails.username) ?: throw UserNotFoundException()
         val task = taskRepository.save(request.toEntity(user))
         return ResponseEntity.status(HttpStatus.CREATED).body(task.toResponse())
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @PutMapping("/{id}")
     fun updateTask(
         @PathVariable @Valid id: Long,
