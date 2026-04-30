@@ -2,6 +2,7 @@ package com.gomaa.tasks.services
 
 import com.gomaa.tasks.dto.LoginRequest
 import com.gomaa.tasks.dto.RegisterRequest
+import com.gomaa.tasks.model.Role
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.userdetails.UserDetails
@@ -23,7 +24,7 @@ class AuthService(
             )
             // auth.principal is the UserDetails loaded by UserDetailsService
             val userDetails = auth.principal as UserDetails
-            val roles = userDetails.authorities.mapNotNull { it.authority }
+            val roles = userDetails.authorities.mapNotNull { Role.valueOf(it.authority!!) }
             return tokenService.generateToken(userDetails.username, roles)
         } catch (ex: Exception) {
             throw ex

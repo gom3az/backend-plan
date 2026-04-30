@@ -19,7 +19,7 @@ class TaskUserDetailsService(
 
         return User.withUsername(user.username)
             .password(user.password)
-            .authorities(user.roles.asSequence().map { SimpleGrantedAuthority(it) }.toSet())
+            .authorities(user.roles.asSequence().map { SimpleGrantedAuthority(it.name) }.toSet())
             .build()
     }
 }
