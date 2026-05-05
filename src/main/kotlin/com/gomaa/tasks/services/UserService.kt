@@ -2,6 +2,7 @@ package com.gomaa.tasks.services
 
 import com.gomaa.tasks.dto.RegisterRequest
 import com.gomaa.tasks.exceptions.UserExistException
+import com.gomaa.tasks.model.Role
 import com.gomaa.tasks.model.User
 import com.gomaa.tasks.repository.UserRepository
 import org.slf4j.Logger
@@ -26,7 +27,7 @@ class UserService(
         val userEntity = User(
             username = request.username,
             password = passwordEncoder.encode(request.password)!!,
-            roles = listOf("ROLE_USER")
+            roles = listOf(Role.ROLE_USER)
         )
 
         return userRepository.save(userEntity)

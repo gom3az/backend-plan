@@ -2,6 +2,7 @@ package com.gomaa.tasks.dto
 
 
 import com.gomaa.tasks.model.Task
+import com.gomaa.tasks.model.User
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Size
 import java.time.LocalDateTime
@@ -41,6 +42,6 @@ fun Task.toResponse() = TaskResponse(
     updatedAt = updatedAt
 )
 
-fun CreateTaskRequest.toEntity() = Task(
-    title = title, description = description, completed = completed, dueDate = dueDate
+fun CreateTaskRequest.toEntity(user: User) = Task(
+    title = title, description = description, completed = completed, dueDate = dueDate, user = user
 )

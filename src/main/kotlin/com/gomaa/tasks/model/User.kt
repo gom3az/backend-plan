@@ -13,7 +13,11 @@ class User(
 
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "user_roles", joinColumns = [JoinColumn(name = "user_id")])
+    @Enumerated(EnumType.STRING) // Stores "ROLE_USER" instead of 0, 1, 2
     @Column(name = "role", nullable = false)
-    val roles: List<String>
-
+    val roles: List<Role>
 )
+
+enum class Role {
+    ROLE_USER, ROLE_ADMIN
+}

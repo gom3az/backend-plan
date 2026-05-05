@@ -21,21 +21,21 @@ class SecurityConfig(
     @Bean
     @Throws(Exception::class)
     fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
-        return http.csrf { it.disable() }
-            .authorizeHttpRequests { auth ->
-                auth.requestMatchers("/token").permitAll()
-                auth.requestMatchers("/register").permitAll()
-                auth.requestMatchers(HttpMethod.POST, "/tasks/**").hasAuthority("ROLE_USER")
-                auth.requestMatchers(HttpMethod.PUT, "/tasks/**").hasAuthority("ROLE_USER")
-                auth.requestMatchers(HttpMethod.DELETE, "/tasks/**").hasAuthority("ROLE_ADMIN")
-                auth.anyRequest().authenticated()
+        return http.csrf { it.disable() }.authorizeHttpRequests { auth ->
+            auth.requestMatchers("/token").permitAll()
+            auth.requestMatchers("/register").permitAll()
+            auth.requestMatchers(HttpMethod.POST, "/tasks/**").hasAuthority("ROLE_USER")
+            auth.requestMatchers(HttpMethod.PUT, "/tasks/**").hasAuthority("ROLE_USER")
+            auth.requestMatchers(HttpMethod.DELETE, "/tasks/**").hasAuthority("ROLE_ADMIN")
+            auth.anyRequest().authenticated()
+        }.exceptionHandling { ex ->
+            ex.authenticationEntryPoint { _, response, _ ->
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized")
             }
-            .exceptionHandling { ex ->
-                ex.authenticationEntryPoint { _, response, _ ->
-                    response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized")
-                }
+            ex.accessDeniedHandler { _, response, _ ->
+                response.sendError(HttpServletResponse.SC_FORBIDDEN, "Access denied")
             }
-            .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter::class.java)
+        }.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter::class.java)
             .sessionManagement { session ->
                 session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             }.build()

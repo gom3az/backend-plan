@@ -38,7 +38,14 @@ class JwtAuthenticationFilter(
             val username = tokenService.extractUsername(token)
             val roles = tokenService.extractRoles(token)
 
-            if (!validUser(username, roles)) {
+            val userDetails = try {
+                taskUserDetailsService.loadUserByUsername(username)
+            } catch (_: UsernameNotFoundException) {
+                filterChain.doFilter(request, response)
+                return
+            }
+
+            if (roles.any { tokenRole -> userDetails.authorities.none { it.authority == tokenRole } }) {
                 filterChain.doFilter(request, response)
                 return
             }
@@ -46,7 +53,7 @@ class JwtAuthenticationFilter(
             val authorities = roles.map { SimpleGrantedAuthority(it) }
 
             val authentication = UsernamePasswordAuthenticationToken(
-                username, null, authorities
+                userDetails, null, authorities
             )
 
             SecurityContextHolder.getContext().authentication = authentication
@@ -55,15 +62,5 @@ class JwtAuthenticationFilter(
         }
 
         filterChain.doFilter(request, response)
-    }
-
-    fun validUser(username: String, roles: List<String>): Boolean {
-        return try {
-            val userDetails = taskUserDetailsService.loadUserByUsername(username)
-
-            return roles.all { tokenRole -> userDetails.authorities.any { it.authority == tokenRole } }
-        } catch (_: UsernameNotFoundException) {
-            false
-        }
     }
 }

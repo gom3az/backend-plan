@@ -1,5 +1,6 @@
 package com.gomaa.tasks.services
 
+import com.gomaa.tasks.model.Role
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.security.Keys
@@ -20,7 +21,7 @@ class TokenService(
 
     private val expirationMs: Long = 1.hours.inWholeMilliseconds
 
-    fun generateToken(username: String, roles: List<String>): String {
+    fun generateToken(username: String, roles: List<Role>): String {
         val now = Date()
         val expiration = Date(now.time + expirationMs)
 
