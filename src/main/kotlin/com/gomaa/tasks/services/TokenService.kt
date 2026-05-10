@@ -13,19 +13,23 @@ import kotlin.time.Duration.Companion.hours
 
 @Service
 class TokenService(
-    @Value($$"${jwt.secret}") private val jwtSecret: String
+    @Value($$"${jwt.secret}") private val jwtSecret: String,
 ) {
     private val secretKey: SecretKey by lazy {
         Keys.hmacShaKeyFor(jwtSecret.toByteArray(StandardCharsets.UTF_8))
     }
 
-    private val expirationMs: Long = 1.hours.inWholeMilliseconds
+    private val expirationMs: Long = 24.hours.inWholeMilliseconds
 
-    fun generateToken(username: String, roles: List<Role>): String {
+    fun generateToken(
+        username: String,
+        roles: List<Role>,
+    ): String {
         val now = Date()
         val expiration = Date(now.time + expirationMs)
 
-        return Jwts.builder()
+        return Jwts
+            .builder()
             .subject(username)
             .claim("roles", roles)
             .issuedAt(now)
@@ -34,29 +38,24 @@ class TokenService(
             .compact()
     }
 
-    fun extractUsername(token: String): String {
-        return extractClaims(token).subject
-    }
+    fun extractUsername(token: String): String = extractClaims(token).subject
 
     @Suppress("UNCHECKED_CAST")
-    fun extractRoles(token: String): List<String> {
-        return extractClaims(token).get("roles", List::class.java) as? List<String> ?: emptyList()
-    }
+    fun extractRoles(token: String): List<String> = extractClaims(token).get("roles", List::class.java) as? List<String> ?: emptyList()
 
-    fun validateToken(token: String): Boolean {
-        return try {
+    fun validateToken(token: String): Boolean =
+        try {
             val claims = extractClaims(token)
             !claims.expiration.before(Date())
         } catch (e: Exception) {
             false
         }
-    }
 
-    private fun extractClaims(token: String): Claims {
-        return Jwts.parser()
+    private fun extractClaims(token: String): Claims =
+        Jwts
+            .parser()
             .verifyWith(secretKey)
             .build()
             .parseSignedClaims(token)
             .payload
-    }
 }

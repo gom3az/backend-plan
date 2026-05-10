@@ -5,6 +5,7 @@ import com.gomaa.tasks.exceptions.ApiValidationException
 import com.gomaa.tasks.exceptions.TaskNotFoundException
 import com.gomaa.tasks.exceptions.UserExistException
 import com.gomaa.tasks.exceptions.UserNotFoundException
+import com.gomaa.tasks.service.InvalidCursorException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.http.converter.HttpMessageNotReadableException
@@ -18,23 +19,23 @@ import org.springframework.web.method.annotation.HandlerMethodValidationExceptio
 
 @RestControllerAdvice
 class GlobalExceptionHandler {
-
     @ExceptionHandler(TaskNotFoundException::class)
     fun handleNotFound(
-        ex: TaskNotFoundException, request: WebRequest
-    ): ResponseEntity<ErrorResponse> {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+        ex: TaskNotFoundException,
+        request: WebRequest,
+    ): ResponseEntity<ErrorResponse> =
+        ResponseEntity.status(HttpStatus.NOT_FOUND).body(
             ErrorResponse(
                 status = HttpStatus.NOT_FOUND.value(),
                 message = ex.message ?: "Resource not found",
-                path = request.getDescription(false).replace("uri=", "")
-            )
+                path = request.getDescription(false).replace("uri=", ""),
+            ),
         )
-    }
 
     @ExceptionHandler(MethodArgumentNotValidException::class)
     fun handleValidation(
-        ex: MethodArgumentNotValidException, request: WebRequest
+        ex: MethodArgumentNotValidException,
+        request: WebRequest,
     ): ResponseEntity<ErrorResponse> {
         val errors = ex.bindingResult.fieldErrors.map { "${it.field}: ${it.defaultMessage}" }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
@@ -42,14 +43,15 @@ class GlobalExceptionHandler {
                 status = HttpStatus.BAD_REQUEST.value(),
                 message = "Validation failed",
                 errors = errors,
-                path = request.getDescription(false).replace("uri=", "")
-            )
+                path = request.getDescription(false).replace("uri=", ""),
+            ),
         )
     }
 
     @ExceptionHandler(HandlerMethodValidationException::class)
     fun handleMethodValidation(
-        ex: HandlerMethodValidationException, request: WebRequest
+        ex: HandlerMethodValidationException,
+        request: WebRequest,
     ): ResponseEntity<ErrorResponse> {
         val errors = ex.allErrors.map { it.defaultMessage ?: "Validation error" }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
@@ -57,114 +59,136 @@ class GlobalExceptionHandler {
                 status = HttpStatus.BAD_REQUEST.value(),
                 message = "Validation failed",
                 errors = errors,
-                path = request.getDescription(false).replace("uri=", "")
-            )
+                path = request.getDescription(false).replace("uri=", ""),
+            ),
         )
     }
 
     @ExceptionHandler(HttpMessageNotReadableException::class)
     fun handleMessageNotReadable(
-        ex: HttpMessageNotReadableException, request: WebRequest
+        ex: HttpMessageNotReadableException,
+        request: WebRequest,
     ): ResponseEntity<ErrorResponse> {
         val rawMessage = ex.mostSpecificCause.message ?: "Invalid request body"
         val fieldName =
-            Regex("""JSON property (\w+)""").find(rawMessage)?.groupValues?.get(1) ?: Regex("""parameter (\w+)""").find(
-                rawMessage
-            )?.groupValues?.get(1)
+            Regex("""JSON property (\w+)""").find(rawMessage)?.groupValues?.get(1) ?: Regex("""parameter (\w+)""")
+                .find(
+                    rawMessage,
+                )?.groupValues
+                ?.get(1)
         val message = fieldName?.let { "$it is required" } ?: "Invalid request body"
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
             ErrorResponse(
                 status = HttpStatus.BAD_REQUEST.value(),
                 message = message,
-                path = request.getDescription(false).replace("uri=", "")
-            )
+                path = request.getDescription(false).replace("uri=", ""),
+            ),
         )
     }
 
     @ExceptionHandler(ApiValidationException::class)
     fun handleApiValidation(
-        ex: ApiValidationException, request: WebRequest
-    ): ResponseEntity<ErrorResponse> {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+        ex: ApiValidationException,
+        request: WebRequest,
+    ): ResponseEntity<ErrorResponse> =
+        ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
             ErrorResponse(
                 status = HttpStatus.BAD_REQUEST.value(),
                 message = ex.message ?: "Validation failed",
-                path = request.getDescription(false).replace("uri=", "")
-            )
+                path = request.getDescription(false).replace("uri=", ""),
+            ),
         )
-    }
 
     @ExceptionHandler(AuthenticationException::class)
     fun handleAuthentication(
-        ex: AuthenticationException, request: WebRequest
-    ): ResponseEntity<ErrorResponse> {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(
+        ex: AuthenticationException,
+        request: WebRequest,
+    ): ResponseEntity<ErrorResponse> =
+        ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(
             ErrorResponse(
                 status = HttpStatus.UNAUTHORIZED.value(),
                 message = "Invalid credentials",
-                path = request.getDescription(false).replace("uri=", "")
-            )
+                path = request.getDescription(false).replace("uri=", ""),
+            ),
         )
-    }
 
     @ExceptionHandler(UserExistException::class)
-    fun handleUserExistException(ex: UserExistException, request: WebRequest): ResponseEntity<ErrorResponse> {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+    fun handleUserExistException(
+        ex: UserExistException,
+        request: WebRequest,
+    ): ResponseEntity<ErrorResponse> =
+        ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
             ErrorResponse(
                 status = HttpStatus.BAD_REQUEST.value(),
                 message = ex.message ?: "User already exists",
-                path = request.getDescription(false).replace("uri=", "")
-            )
+                path = request.getDescription(false).replace("uri=", ""),
+            ),
         )
-    }
 
     @ExceptionHandler(UserNotFoundException::class)
-    fun handleUserNotFoundException(ex: UserNotFoundException, request: WebRequest): ResponseEntity<ErrorResponse> {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+    fun handleUserNotFoundException(
+        ex: UserNotFoundException,
+        request: WebRequest,
+    ): ResponseEntity<ErrorResponse> =
+        ResponseEntity.status(HttpStatus.NOT_FOUND).body(
             ErrorResponse(
                 status = HttpStatus.NOT_FOUND.value(),
                 message = ex.message ?: "User does not exist",
-                path = request.getDescription(false).replace("uri=", "")
-            )
+                path = request.getDescription(false).replace("uri=", ""),
+            ),
         )
-    }
+
+    @ExceptionHandler(InvalidCursorException::class)
+    fun handleInvalidCursor(
+        ex: InvalidCursorException,
+        request: WebRequest,
+    ): ResponseEntity<ErrorResponse> =
+        ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+            ErrorResponse(
+                status = HttpStatus.BAD_REQUEST.value(),
+                message = ex.message ?: "Invalid cursor",
+                path = request.getDescription(false).replace("uri=", ""),
+            ),
+        )
 
     @ExceptionHandler(Exception::class)
     fun handleGeneric(
-        ex: Exception, request: WebRequest
+        ex: Exception,
+        request: WebRequest,
     ): ResponseEntity<ErrorResponse> {
+        ex.printStackTrace()
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
             ErrorResponse(
                 status = HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                message = "An unexpected error occurred",
-                path = request.getDescription(false).replace("uri=", "")
-            )
+                message = ex.message ?: "An unexpected error occurred",
+                path = request.getDescription(false).replace("uri=", ""),
+            ),
         )
     }
 
     @ExceptionHandler(AccessDeniedException::class)
     fun handleAccessDenied(
-        ex: AccessDeniedException, request: WebRequest
-    ): ResponseEntity<ErrorResponse> {
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(
+        ex: AccessDeniedException,
+        request: WebRequest,
+    ): ResponseEntity<ErrorResponse> =
+        ResponseEntity.status(HttpStatus.FORBIDDEN).body(
             ErrorResponse(
                 status = HttpStatus.FORBIDDEN.value(),
                 message = "Access denied",
-                path = request.getDescription(false).replace("uri=", "")
-            )
+                path = request.getDescription(false).replace("uri=", ""),
+            ),
         )
-    }
 
     @ExceptionHandler(AuthorizationDeniedException::class)
     fun handleAuthorizationDenied(
-        ex: AuthorizationDeniedException, request: WebRequest
-    ): ResponseEntity<ErrorResponse> {
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(
+        ex: AuthorizationDeniedException,
+        request: WebRequest,
+    ): ResponseEntity<ErrorResponse> =
+        ResponseEntity.status(HttpStatus.FORBIDDEN).body(
             ErrorResponse(
                 status = HttpStatus.FORBIDDEN.value(),
                 message = "Not allowed to perform this operation",
-                path = request.getDescription(false).replace("uri=", "")
-            )
+                path = request.getDescription(false).replace("uri=", ""),
+            ),
         )
-    }
 }

@@ -14,11 +14,13 @@ import org.springframework.web.filter.OncePerRequestFilter
 
 @Component
 class JwtAuthenticationFilter(
-    private val taskUserDetailsService: TaskUserDetailsService, private val tokenService: TokenService
+    private val taskUserDetailsService: TaskUserDetailsService,
+    private val tokenService: TokenService,
 ) : OncePerRequestFilter() {
-
     override fun doFilterInternal(
-        request: HttpServletRequest, response: HttpServletResponse, filterChain: FilterChain
+        request: HttpServletRequest,
+        response: HttpServletResponse,
+        filterChain: FilterChain,
     ) {
         val authHeader = request.getHeader("Authorization")
 
@@ -38,12 +40,13 @@ class JwtAuthenticationFilter(
             val username = tokenService.extractUsername(token)
             val roles = tokenService.extractRoles(token)
 
-            val userDetails = try {
-                taskUserDetailsService.loadUserByUsername(username)
-            } catch (_: UsernameNotFoundException) {
-                filterChain.doFilter(request, response)
-                return
-            }
+            val userDetails =
+                try {
+                    taskUserDetailsService.loadUserByUsername(username)
+                } catch (_: UsernameNotFoundException) {
+                    filterChain.doFilter(request, response)
+                    return
+                }
 
             if (roles.any { tokenRole -> userDetails.authorities.none { it.authority == tokenRole } }) {
                 filterChain.doFilter(request, response)
@@ -52,9 +55,12 @@ class JwtAuthenticationFilter(
 
             val authorities = roles.map { SimpleGrantedAuthority(it) }
 
-            val authentication = UsernamePasswordAuthenticationToken(
-                userDetails, null, authorities
-            )
+            val authentication =
+                UsernamePasswordAuthenticationToken(
+                    userDetails,
+                    null,
+                    authorities,
+                )
 
             SecurityContextHolder.getContext().authentication = authentication
         } catch (_: Exception) {

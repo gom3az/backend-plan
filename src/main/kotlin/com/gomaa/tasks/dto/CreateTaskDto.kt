@@ -1,6 +1,5 @@
 package com.gomaa.tasks.dto
 
-
 import com.gomaa.tasks.model.Task
 import com.gomaa.tasks.model.User
 import jakarta.validation.constraints.NotBlank
@@ -11,7 +10,7 @@ data class CreateTaskRequest(
     @field:NotBlank(message = "Title is required") @field:Size(
         min = 1,
         max = 255,
-        message = "Title must be between 1 and 255 characters"
+        message = "Title must be between 1 and 255 characters",
     )
     val title: String,
     val completed: Boolean = false,
@@ -20,7 +19,6 @@ data class CreateTaskRequest(
     val dueDate: LocalDateTime? = null,
 )
 
-
 data class TaskResponse(
     val id: Long,
     val title: String,
@@ -28,20 +26,25 @@ data class TaskResponse(
     val completed: Boolean,
     val dueDate: LocalDateTime?,
     val createdAt: LocalDateTime,
-    val updatedAt: LocalDateTime
+    val updatedAt: LocalDateTime,
 )
 
+fun Task.toResponse() =
+    TaskResponse(
+        id = id,
+        title = title,
+        description = description,
+        completed = completed,
+        dueDate = dueDate,
+        createdAt = createdAt,
+        updatedAt = updatedAt,
+    )
 
-fun Task.toResponse() = TaskResponse(
-    id = id,
-    title = title,
-    description = description,
-    completed = completed,
-    dueDate = dueDate,
-    createdAt = createdAt,
-    updatedAt = updatedAt
-)
-
-fun CreateTaskRequest.toEntity(user: User) = Task(
-    title = title, description = description, completed = completed, dueDate = dueDate, user = user
-)
+fun CreateTaskRequest.toEntity(user: User) =
+    Task(
+        title = title,
+        description = description,
+        completed = completed,
+        dueDate = dueDate,
+        user = user,
+    )

@@ -14,9 +14,8 @@ import org.springframework.stereotype.Service
 class UserService(
     val userRepository: UserRepository,
     val passwordEncoder: PasswordEncoder,
-    val logger: Logger = LoggerFactory.getLogger(UserService::class.java)
+    val logger: Logger = LoggerFactory.getLogger(UserService::class.java),
 ) {
-
     fun createUser(request: RegisterRequest): User {
         logger.info("Creating user {}", request.username)
 
@@ -24,13 +23,13 @@ class UserService(
             throw UserExistException()
         }
 
-        val userEntity = User(
-            username = request.username,
-            password = passwordEncoder.encode(request.password)!!,
-            roles = listOf(Role.ROLE_USER)
-        )
+        val userEntity =
+            User(
+                username = request.username,
+                password = passwordEncoder.encode(request.password)!!,
+                roles = listOf(Role.ROLE_USER),
+            )
 
         return userRepository.save(userEntity)
     }
-
 }

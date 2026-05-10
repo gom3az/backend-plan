@@ -15,17 +15,16 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class AuthController(
     val authService: AuthService,
-    val logger: Logger = LoggerFactory.getLogger(AuthController::class.java)
+    val logger: Logger = LoggerFactory.getLogger(AuthController::class.java),
 ) {
-
     @PostMapping("/token")
     @Throws(AuthenticationException::class)
-    fun token(@RequestBody @Valid userLogin: LoginRequest): ResponseEntity<String> {
-        return ResponseEntity.ok(authService.login(userLogin))
-    }
+    fun token(
+        @RequestBody @Valid userLogin: LoginRequest,
+    ): ResponseEntity<String> = ResponseEntity.ok(authService.login(userLogin))
 
     @PostMapping("/register")
-    fun register(@RequestBody @Valid request: @Valid RegisterRequest): ResponseEntity<String> {
-        return ResponseEntity.ok(authService.register(request))
-    }
+    fun register(
+        @RequestBody @Valid request: @Valid RegisterRequest,
+    ): ResponseEntity<String> = ResponseEntity.ok(authService.register(request))
 }

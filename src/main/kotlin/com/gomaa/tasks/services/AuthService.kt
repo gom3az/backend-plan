@@ -14,14 +14,15 @@ class AuthService(
     val authenticationManager: AuthenticationManager,
     val userService: UserService,
 ) {
-
     fun login(userLogin: LoginRequest): String {
         try {
-            val auth = authenticationManager.authenticate(
-                UsernamePasswordAuthenticationToken(
-                    userLogin.username, userLogin.password
+            val auth =
+                authenticationManager.authenticate(
+                    UsernamePasswordAuthenticationToken(
+                        userLogin.username,
+                        userLogin.password,
+                    ),
                 )
-            )
             // auth.principal is the UserDetails loaded by UserDetailsService
             val userDetails = auth.principal as UserDetails
             val roles = userDetails.authorities.mapNotNull { Role.valueOf(it.authority!!) }
