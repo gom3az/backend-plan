@@ -1,0 +1,129 @@
+### 
+
+@auth_token = eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJnb21hYSIsInJvbGVzIjpbIlJPTEVfQURNSU4iLCJST0xFX1VTRVIiXSwiaWF0IjoxNzc4NTc1OTExLCJleHAiOjE3Nzg2NjIzMTF9.vs7aSuTvl63mpKrJwPLGgD9IOZWT2GzoZOLUqeNrVBxdmFUT3Ll-px_MnL0PBP7c
+@baseUrl = http://localhost:8080
+
+GET ========================================== HTTP/1.1
+
+
+### AUTH ENDPOINTS
+
+
+### ============================================
+
+
+### Login and get JWT token
+
+POST {{baseUrl}}/token HTTP/1.1
+Content-Type: application/json
+
+{
+  "password": "Test@123",
+  "username": "gomaa"
+}
+
+> {%
+  if (response.status === 200 && response.body?.token) {
+    client.global.set("auth_token", response.body.token);
+    client.log("Token saved: " + response.body.token);
+  } else {
+    client.log("Warning: Token not found in response");
+  }
+%}
+
+
+### Register new user
+
+POST {{baseUrl}}/register HTTP/1.1
+Content-Type: application/json
+
+{
+  "password": "password123",
+  "username": "newuser"
+}
+
+
+### ============================================
+
+
+### TASK CRUD ENDPOINTS
+
+
+### ============================================
+
+
+### List tasks (cursor-based pagination)
+
+
+### Supports: pageSize, sort, direction, afterCursor, dueDateFrom, dueDateTo
+
+GET {{baseUrl}}/tasks HTTP/1.1
+Authorization: Bearer {{auth_token}}
+
+
+### List tasks with custom page size
+
+GET {{baseUrl}}/tasks?pageSize=10 HTTP/1.1
+Authorization: Bearer {{auth_token}}
+
+
+### List tasks sorted by dueDate ascending
+
+GET {{baseUrl}}/tasks?sort=dueDate&direction=asc HTTP/1.1
+Authorization: Bearer {{auth_token}}
+
+
+### List tasks with date filter
+
+GET {{baseUrl}}/tasks?dueDateFrom=2026-01-01&dueDateTo=2026-12-31 HTTP/1.1
+Authorization: Bearer {{auth_token}}
+
+
+### List tasks with cursor pagination (use nextCursor from previous response)
+
+GET {{baseUrl}}/tasks?pageSize=4&afterCursor=eyJjcmVhdGVkQXQiOiIyMDI2LTA1LTA1VDE3OjQyOjU5LjczMTU1NCIsImR1ZURhdGUiOm51bGwsImlkIjoiMTIifQ== HTTP/1.1
+Authorization: Bearer {{auth_token}}
+
+
+### Get single task by ID
+
+GET {{baseUrl}}/tasks/1 HTTP/1.1
+Authorization: Bearer {{auth_token}}
+
+
+### Create new task (requires ROLE_ADMIN)
+
+POST {{baseUrl}}/tasks HTTP/1.1
+Authorization: Bearer {{auth_token}}
+Content-Type: application/json
+
+{
+  "completed": false,
+  "description": "Task description here",
+  "dueDate": "2026-06-15T10:00:00",
+  "title": "New Task"
+}
+
+
+### Update task (requires ROLE_ADMIN)
+
+
+### All fields optional - partial update supported
+
+PUT {{baseUrl}}/tasks/1 HTTP/1.1
+Authorization: Bearer {{auth_token}}
+Content-Type: application/json
+
+{
+  "completed": true,
+  "title": "Updated Task Title"
+}
+
+
+### Delete task (requires ROLE_ADMIN) - placeholder
+
+
+### Note: DELETE endpoint is configured in security but not yet implemented in controller
+
+DELETE {{baseUrl}}/tasks/1 HTTP/1.1
+Authorization: Bearer {{auth_token}}

@@ -44,6 +44,10 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-webmvc-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    testImplementation("org.testcontainers:junit-jupiter:1.19.7")
+    testImplementation("org.testcontainers:postgresql:1.19.7")
+    testImplementation("org.postgresql:postgresql:42.7.2")
+    testImplementation("io.rest-assured:rest-assured:5.4.0")
 }
 
 kotlin {
@@ -51,7 +55,6 @@ kotlin {
         freeCompilerArgs.addAll("-Xjsr305=strict", "-Xannotation-default-target=param-property")
     }
 }
-
 allOpen {
     annotation("jakarta.persistence.Entity")
     annotation("jakarta.persistence.MappedSuperclass")
