@@ -1,5 +1,6 @@
 package com.gomaa.tasks.repository
 
+import com.gomaa.tasks.SpringBootTestWithPostgres
 import io.restassured.RestAssured
 import org.testcontainers.containers.PostgreSQLContainer
 import org.junit.jupiter.api.extension.ExtendWith
@@ -19,7 +20,7 @@ import kotlin.test.assertEquals
 import kotlin.time.Duration.Companion.hours
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@Testcontainers
+@SpringBootTestWithPostgres
 class TaskContainerTest @Autowired constructor(
     val taskRepository: TaskRepository
 ) {
@@ -27,20 +28,6 @@ class TaskContainerTest @Autowired constructor(
     @LocalServerPort
     private var port: Int = 0
 
-    companion object {
-
-        @Container
-        private val postgres = PostgreSQLContainer("postgres:16-alpine")
-
-        @JvmStatic
-        @DynamicPropertySource
-        fun registerDynamicProperties(registry: DynamicPropertyRegistry) {
-            registry.add("spring.datasource.url", postgres::getJdbcUrl)
-            registry.add("spring.datasource.username", postgres::getUsername)
-            registry.add("spring.datasource.password", postgres::getPassword)
-            registry.add("spring.datasource.driver-class-name", { "org.postgresql.Driver" })
-        }
-    }
 
     @Test
     fun shouldGetEmptyTaskList() {
