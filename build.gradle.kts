@@ -47,7 +47,7 @@ dependencies {
     testImplementation("org.testcontainers:junit-jupiter:1.19.7")
     testImplementation("org.testcontainers:postgresql:1.19.7")
     testImplementation("org.postgresql:postgresql:42.7.2")
-    testImplementation("io.rest-assured:rest-assured:5.4.0")
+    testImplementation("io.rest-assured:rest-assured:6.0.0")
 }
 
 kotlin {

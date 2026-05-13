@@ -1,6 +1,6 @@
 ### 
 
-@auth_token = eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJnb21hYSIsInJvbGVzIjpbIlJPTEVfQURNSU4iLCJST0xFX1VTRVIiXSwiaWF0IjoxNzc4NTc1OTExLCJleHAiOjE3Nzg2NjIzMTF9.vs7aSuTvl63mpKrJwPLGgD9IOZWT2GzoZOLUqeNrVBxdmFUT3Ll-px_MnL0PBP7c
+@auth_token = eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJnb21hYSIsInJvbGVzIjpbIlJPTEVfQURNSU4iLCJST0xFX1VTRVIiXSwiaWF0IjoxNzc4NTk1ODQ3LCJleHAiOjE3Nzg2ODIyNDd9.DdHztpHLkhF6buIwso7FJ8jMKll806rOyiP3YD00t_DWD1qSuAnLgBt9b-T0cqJK
 @baseUrl = http://localhost:8080
 
 GET ========================================== HTTP/1.1
